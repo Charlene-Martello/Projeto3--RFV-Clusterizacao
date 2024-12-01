@@ -126,28 +126,26 @@ if caminho_arquivo:
         st.write("### Clusterização:")
         st.write('''Nosso objetivo aqui é agrupar os clientes de acordo com o seu perfil para então 
                 desenvolvermos ações de marketing direcionadas para cada grupo. Para fazer isso, iremos
-                utilizar dois métodos que nos auxiliam na escolha de segmentação de dados:
-                1. **Método do Cotovelo:** Avalia a inércia (distância dentro dos clusters). O ponto onde a redução da inércia desacelera indica o número ideal de clusters.
-
-                2. **Coeficiente de Silhueta:** Mede a coesão e a separação entre os clusters. Quanto maior o valor, melhor o agrupamento.
-                 
-                 
-                Para selecionar de quantos clusters você quer fazer a observação das pontuações, basta utilizar a primeira barra do lado esquerdo.''')
+                utilizar dois métodos que nos auxiliam na escolha de segmentação de dados.''')
+        st.write("Do lado esquerdo, na primeira barra, você pode selecionar o número máximo de clusters a ser analisado.")
 
         # Método do Cotovelo
         st.write("### Método do Cotovelo")
+        st.write("Esse método avalia a inércia (distância dentro dos clusters). O ponto onde a redução da inércia desacelera indica o número ideal de clusters.")
         max_clusters = st.sidebar.slider("Máximo de clusters", 5, 20, 15)
         fig_cotovelo = plotar_cotovelo(df_rfv_padronizado, max_clusters)
         st.pyplot(fig_cotovelo)
 
         # Método da Silhueta
         st.write("### Método da Silhueta")
+        st.write("O coeficiente da silhueta mede a coesão e a separação entre os clusters. Quanto maior o valor, melhor o agrupamento.")
+
         fig_silhueta, silhouette_scores = calcular_silhueta(df_rfv_padronizado, max_clusters)
         melhor_k = silhouette_scores.index(max(silhouette_scores)) + 2
         st.pyplot(fig_silhueta)
         st.write(f"**Melhor número de clusters (Silhueta):** {melhor_k}")
 
-        st.write('Agora que já visualizamos os métodos acima, utilize a barra de baixo para selecionar o número de clusters escolhido.')
+        st.write('Agora que já visualizamos os métodos acima, utilize a segunda barra para selecionar o número de clusters desejado para o agrupamento.')
         
     # Clusterização com KMeans
         n_clusters = st.sidebar.slider("Número de clusters", 2, 10, melhor_k)
@@ -157,15 +155,13 @@ if caminho_arquivo:
         # Adicionar os clusters ao DataFrame padronizado
         df_rfv_padronizado['Cluster'] = labels  # Adiciona a coluna Cluster
 
-        st.write("Agora que você realizou a seleção, visualize abaixo o gráfico desses clusters 3D e em seguida uma tabela que apresenta a média e a contagem para cada grupo. ")
-        
         # Visualização em 3D
-        st.write("### Visualização dos Clusters em 3D")
+        st.write("### Segmentação Selecionada em 3D:")
         fig_3d = plotar_clusters_3d(df_rfv_padronizado, labels, variaveis_rfv)
         st.pyplot(fig_3d)
                 
         # Tabela cruzada com média das variáveis por cluster
-        st.write("### Tabela Cruzada")
+        st.write("### Tabela Cruzada:")
         tabela_crosstab = df_rfv_padronizado.groupby('Cluster')[variaveis_rfv].mean()
 
         # Adicionando o tamanho de cada cluster
@@ -177,7 +173,7 @@ if caminho_arquivo:
 
 
         # Interpretação da Tabela Cruzada
-        st.write("### Interpretação da Tabela Cruzada")
+        st.write("### Interpretação da Tabela Cruzada:")
 
         if n_clusters == 2:
             st.write("Em termos de interpretação, sabemos que uma **recência menor** indica clientes que realizaram compras mais recentemente, o que é desejável. Por outro lado, **frequência** e **valor** maiores refletem clientes mais ativos e com maior gasto total, características também desejáveis.")
