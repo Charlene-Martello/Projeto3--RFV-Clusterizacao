@@ -2,6 +2,8 @@
 
 Este projeto tem como objetivo analisar e segmentar clientes com base no modelo RFV (Recência, Frequência e Valor) utilizando técnicas de aprendizado não supervisionado, especificamente o algoritmo **K-Means**, para identificar diferentes perfis de clientes e definir estratégias de marketing personalizadas.
 
+**Link**: https://projeto3-rfv-clusterizacao.onrender.com
+
 ## **Funcionalidades do Projeto**
 
 - **Carregamento de Dados:** Permite carregar arquivos CSV contendo informações de transações dos clientes.
