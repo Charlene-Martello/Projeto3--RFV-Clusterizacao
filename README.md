@@ -56,4 +56,5 @@ Este projeto tem como objetivo analisar e segmentar clientes com base no modelo 
      - **Tamanho de cada cluster.**
      - Estratégias sugeridas de marketing para cada grupo.
    - Baixe os resultados no formato Excel clicando no botão **"Download da tabela acima no formato .xlsx"**.
-**obs**: A análise da tabela é em relação ao csv disponibilizado nesse repositório. 
+
+**Obs**: A análise da tabela é em relação ao csv disponibilizado nesse repositório. 
